@@ -13,7 +13,7 @@ from pathlib import Path
 os.environ.setdefault("KIVY_NO_CONSOLELOG", "1")
 os.environ.setdefault("KIVY_NO_ARGS", "1")
 
-ROOT = Path(__file__).resolve().parents[2]  # src/ModelPaintPal
+ROOT = Path(__file__).resolve().parents[2]  # 仓库根
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 

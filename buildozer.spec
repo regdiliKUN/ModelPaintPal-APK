@@ -21,9 +21,10 @@ source.include_exts = py,png,jpg,jpeg,kv,atlas,json,db,ttf,otf,txt,md,csv
 #   docs —— 截图，只给 README 用
 #   scripts —— sync_core.py 等工具
 #   apk —— 分发用的安装包，别塞进下一个安装包里
+#   _archive —— 本地留档（历史安装包、旧源码 zip），体积大
 #   _core —— CI 里 checkout 的桌面版仓库副本
 #   app/ui,app/resources —— 桌面端 PySide6 界面，安卓用不到
-source.exclude_dirs = tests,mobile/tests,build,dist,.buildozer,bin,docs,scripts,apk,_core,.git,.github,app/ui,app/resources
+source.exclude_dirs = tests,mobile/tests,build,dist,.buildozer,bin,docs,scripts,apk,_archive,_core,.git,.github,app/ui,app/resources
 
 # (str) 入口文件（位于 source.dir 根）
 source.main = main.py

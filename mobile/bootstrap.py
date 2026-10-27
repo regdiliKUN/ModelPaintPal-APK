@@ -16,7 +16,7 @@ import sys
 from pathlib import Path
 from typing import Optional
 
-ROOT = Path(__file__).resolve().parent.parent  # src/ModelPaintPal
+ROOT = Path(__file__).resolve().parent.parent  # 仓库根（app/ 与 mobile/ 同级）
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 

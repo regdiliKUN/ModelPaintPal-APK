@@ -154,5 +154,5 @@ python -m unittest discover -s mobile/tests -p "test_*.py" -v
   **坐标系**：取色区放在 `pos=(0,120)` 时仍要取对颜色、拖动与按下必须是同一套坐标）。
 - 无头环境跑 UI 测试需指定窗口后端：`KIVY_WINDOW=sdl2 python -m unittest ...`，
   否则 Kivy 在 import 阶段会静默崩溃。
-- 注意用 `discover` 形式运行：`python -m unittest discover -s src/ModelPaintPal/mobile/tests -t src`。
+- 注意用 `discover` 形式运行：`python scripts/run_tests.py`。
   直接 `-m unittest 模块名` 在本机会因 Kivy 的 stdout 代理而**一行输出都没有**。

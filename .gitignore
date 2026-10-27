@@ -13,3 +13,6 @@ bin/
 test-report.txt
 .mobile_userdata/
 **/userdata/
+
+# 本地留档（不入库）
+_archive/
