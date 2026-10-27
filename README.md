@@ -11,9 +11,9 @@
 
 **最新版 1.4.0**（2026-10-27）
 
-[⬇ modelpaintpal-1.4.0-fullscreen-debug.apk](apk/modelpaintpal-1.4.0-fullscreen-debug.apk) · 28.1 MB
+[⬇ 直接下载 modelpaintpal-1.4.0-fullscreen-debug.apk](https://github.com/regdiliKUN/ModelPaintPal-APK/releases/download/v1.4.0/modelpaintpal-1.4.0-fullscreen-debug.apk) · 28.1 MB
 
-历史版本见 [Releases](https://github.com/regdiliKUN/ModelPaintPal-APK/releases)。
+仓库里也存了同一份：`apk/modelpaintpal-1.4.0-fullscreen-debug.apk`。历史版本见 [Releases](https://github.com/regdiliKUN/ModelPaintPal-APK/releases)。
 
 ## 安装
 
