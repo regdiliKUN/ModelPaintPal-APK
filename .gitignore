@@ -1,0 +1,15 @@
+__pycache__/
+*.pyc
+
+# 构建前从桌面版仓库同步进来的核心层（见 scripts/sync_core.py）
+/app/
+
+# buildozer 产物
+.buildozer/
+bin/
+*.log
+
+# 测试报告与运行时用户数据
+test-report.txt
+.mobile_userdata/
+**/userdata/

@@ -1,9 +1,10 @@
-# ModelPaintPal · 安卓安装包
+# ModelPaintPal · 安卓版
 
-手办 / 模型涂装配色助手的 Android 安装包（APK）分发仓库。
+手办 / 模型涂装配色助手的 Android 版：**界面源码 + 安装包**都在这里。
 屏幕取色、模型漆匹配、可执行滴数配方与用量估算。
 
-源码、构建脚本与开发文档在主仓库：[regdiliKUN/ModelPaintPal](https://github.com/regdiliKUN/ModelPaintPal)
+桌面版（Windows）在另一个仓库：[regdiliKUN/ModelPaintPal](https://github.com/regdiliKUN/ModelPaintPal)。
+配色匹配、配方计算、数据库这些**核心逻辑不在这里重复维护**，见下方「源码与构建」。
 
 ---
 
@@ -22,6 +23,43 @@
 3. 打开 App → 图库取色 → 选一张照片。
 
 **只支持 `arm64-v8a`**（2018 年之后的主流机型都是）。老款 armeabi-v7a 机型装不上。
+
+## 界面
+
+| 取色（全屏） | 配色建议 | 调色配方 |
+| --- | --- | --- |
+| ![取色](docs/screenshots/11-gallery-sampled.png) | ![建议](docs/screenshots/02-suggest.png) | ![配方](docs/screenshots/03-mix.png) |
+
+更多截图见 `docs/screenshots/`。
+
+## 源码与构建
+
+```
+.
+├── mobile/            安卓端界面（Kivy）：screens / widgets / theme / photo 取色
+├── main.py            buildozer 入口
+├── buildozer.spec     打包配置（arm64-v8a，API 33）
+├── scripts/
+│   ├── sync_core.py   从桌面版仓库同步 app 核心层
+│   └── run_tests.py   跑单元测试（结果写 test-report.txt）
+├── apk/               当前最新安装包
+└── docs/screenshots/  界面截图
+```
+
+核心层 `app/`（`core` / `data` / `services`）**不进版本库**：它属于桌面版，
+每次构建前从桌面版仓库同步一份，避免两份代码各改各的。`app/ui`、`app/resources`
+是 Qt 界面，打包时被 `buildozer.spec` 排除。
+
+```bash
+python scripts/sync_core.py      # 从同级目录的 ModelPaintPal 取核心层
+python scripts/run_tests.py      # 54 项单元测试
+
+pip install buildozer==1.6.0
+buildozer android debug          # 产物在 bin/
+```
+
+`sync_core.py` 也支持 `--from <app 目录>` 和 `--from-git`（浅克隆桌面版仓库）。
+CI（`.github/workflows/build-apk.yml`）就是先 checkout 桌面版仓库、同步核心层，再打包。
 
 ## 版本
 
@@ -52,12 +90,6 @@
 sha256sum -c SHA256SUMS.txt
 ```
 
-单个文件：
-
-```bash
-sha256sum modelpaintpal-1.4.0-fullscreen-debug.apk
-```
-
 历史版本的完整校验值：
 
 ```
@@ -69,8 +101,8 @@ e546e86b04938ba1d9e35a99861804b105c51f5c246adf254f0a5e8913abc9c8  modelpaintpal-
 a545756935dcbb4c00c12ae3fa17398d63c2d062abab16abfeef38fc05f71d9c  modelpaintpal-1.4.0-fullscreen-debug.apk
 ```
 
-## 本仓库的约定
+## 发布新版本
 
-- `apk/` 只放**当前最新版**，保证 clone 轻量；
-- 每个版本同时发一个 Release，历史版本从 Releases 下载；
-- 新增版本时：替换 `apk/` 下的文件、更新 `SHA256SUMS.txt` 和上面的版本表、打 tag 发 Release。
+1. 改 `buildozer.spec` 的 `version`，跑 `buildozer android debug`；
+2. 把新包放进 `apk/`（删掉旧的），更新 `SHA256SUMS.txt` 和上面的版本表；
+3. 打 tag 发 Release。
